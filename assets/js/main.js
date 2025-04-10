@@ -251,3 +251,35 @@
   });
 
 })()
+
+// Function to toggle the description text
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.descricao').forEach(paragraph => {
+    const button = document.createElement('button');
+    button.classList.add('lerMaisBtn');
+    button.innerText = 'Ler Mais';
+    button.style.display = 'none'; 
+
+    // Verifica se o parágrafo é grande
+    if (paragraph.scrollHeight > 100) { // Ajuste o valor conforme necessário
+      button.style.display = 'inline-block'; // Exibe o botão se o parágrafo for grande
+      paragraph.style.maxHeight = '100px'; // Define a altura inicial
+      paragraph.style.overflow = 'hidden'; // Oculta o texto excedente
+      paragraph.style.transition = 'max-height 0.3s ease';
+
+      // Adiciona o botão após o parágrafo
+      paragraph.parentNode.appendChild(button);
+
+      // Adiciona o evento de clique ao botão
+      button.addEventListener('click', () => {
+        if (paragraph.style.maxHeight === '100px') {
+          paragraph.style.maxHeight = paragraph.scrollHeight + 'px';
+          button.innerText = 'Ler Menos';
+        } else {
+          paragraph.style.maxHeight = '100px'; 
+          button.innerText = 'Ler Mais';
+        }
+      });
+    }
+  });
+});
